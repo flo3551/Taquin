@@ -42,7 +42,10 @@ MainActivity extends Activity {
             RadioButton rb = (RadioButton) findViewById(radioGroup.getCheckedRadioButtonId());
             Log.d("Test", rb.getText() + "");
 
-
+            // Start activity
+            // Put extra
+            // 1 = tailleGrille
+            // 2 = Path image
         }
 
     }

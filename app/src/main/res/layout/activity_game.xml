@@ -24,5 +24,14 @@
             android:textAlignment="center"
             android:textStyle="normal|bold" />
 
+        <GridView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/leGridView"
+            android:verticalSpacing="1dp"
+            android:horizontalSpacing="1dp"
+            android:gravity="center"
+            android:layout_marginTop="10dp"/>
+
     </LinearLayout>
 </RelativeLayout>

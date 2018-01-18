@@ -60,7 +60,8 @@
                             <RadioGroup
                                 android:layout_width="match_parent"
                                 android:layout_height="44dp"
-                                android:orientation="horizontal">
+                                android:orientation="horizontal"
+                                android:id="@+id/radioGroup">
 
                                 <RadioButton
                                     android:text="Image 1 "

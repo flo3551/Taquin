@@ -7,6 +7,8 @@ import android.graphics.drawable.Drawable;
 import android.media.Image;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.GridView;
 import android.widget.RelativeLayout;
@@ -42,10 +44,20 @@ public class GameActivity extends Activity {
                 image = BitmapFactory.decodeResource(this.getResources(), R.drawable.rick);
                 break;
         }
-        GridView leGV = (GridView) findViewById(R.id.leGridView);
+        final GridView leGV = (GridView) findViewById(R.id.leGridView);
         adapter = new ImageAdapter(getBaseContext(), image, taille);
         leGV.setAdapter(adapter);
         leGV.setNumColumns(taille);
+
+        leGV.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View v,
+                                    int position, long id) {
+                adapter.deplacerCase(position);
+                //Log.d("test", position+"");
+                leGV.setAdapter(adapter);
+            }
+        });
     }
 
 }

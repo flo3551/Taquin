@@ -11,11 +11,15 @@ import android.view.WindowManager;
 import android.widget.BaseAdapter;
 import android.widget.GridView;
 import android.widget.ImageView;
+import android.widget.Toast;
+
+import java.util.Random;
 
 public class ImageAdapter extends BaseAdapter {
     private Context mContext;
     private Bitmap image;
     private int taille;
+    private Bitmap caseVide;
     // references to our images
     private Bitmap mThumbIds[];
 
@@ -25,6 +29,11 @@ public class ImageAdapter extends BaseAdapter {
         this.taille = taille;
         this.mThumbIds = new Bitmap[taille * taille];
         decouper(this.image);
+        melangeCase(mThumbIds);
+    }
+
+    public Bitmap getTabImage(){
+        return null;
     }
 
     public void decouper(Bitmap image){
@@ -38,6 +47,64 @@ public class ImageAdapter extends BaseAdapter {
             }
         }
         mThumbIds[mThumbIds.length-1]=Bitmap.createBitmap(tailleDecoupe,tailleDecoupe , Bitmap.Config.ALPHA_8);
+        caseVide = mThumbIds[mThumbIds.length-1];
+        Log.d("test", mThumbIds[mThumbIds.length-1] + "");
+    }
+
+    public void melangeCase(Bitmap[] lesImages){
+        Bitmap img =  mThumbIds[mThumbIds.length-1];
+        for(int i=0;i<mThumbIds.length * 200; i++)
+        {
+            //Nombre aléatoire entre 0 et le nombre d'image présent dans le tableau
+            Random rand = new Random();
+            int n = rand.nextInt(mThumbIds.length);
+            Bitmap stockImage =  mThumbIds[n];
+
+            //Mélange
+            if(n == mThumbIds.length-1) {
+                mThumbIds[n] = mThumbIds[n - 1];
+                mThumbIds[n - 1] = stockImage;
+            }
+            else{
+                mThumbIds[n] = mThumbIds[n+1];
+                mThumbIds[n+1]= stockImage;
+            }
+
+        }
+    }
+
+    public void deplacerCase(int position){
+        Bitmap img =  mThumbIds[position];
+        System.out.println("ImageAdapter.deplacerCase");
+        //Si la case vide est à droite
+        if((position != mThumbIds.length-1) && mThumbIds[position+1] == caseVide ){
+            mThumbIds[position] = mThumbIds[position+1];
+            mThumbIds[position+1]=img;
+            Log.d("test", "position + 1 ");
+        }
+        //si la case est vide a gauche
+        else if((position != 0) && mThumbIds[position-1] == caseVide){
+            mThumbIds[position] = mThumbIds[position-1];
+            mThumbIds[position-1]=img;
+            Log.d("test", "position - 1 ");
+
+        }
+        //si la case est vide en dessous
+        else if((position <= (taille*taille) - taille ) && mThumbIds[position+taille] == caseVide){
+            mThumbIds[position] = mThumbIds[position+taille];
+            mThumbIds[position+taille]=img;
+            Log.d("test", "position + taille");
+        }
+        //si la case est vide au dessus
+        else if((position >= taille ) && mThumbIds[position-taille] == caseVide){
+            mThumbIds[position] = mThumbIds[position-taille];
+            mThumbIds[position-taille]=img;
+            Log.d("test", "position - taille");
+        }
+        else{
+            Toast toast = Toast.makeText(mContext, "Mouvement impossible ! ", Toast.LENGTH_LONG);
+            toast.show();
+        }
 
     }
 

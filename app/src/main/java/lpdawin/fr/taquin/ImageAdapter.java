@@ -76,8 +76,89 @@ public class ImageAdapter extends BaseAdapter {
     public void deplacerCase(int position){
         Bitmap img =  mThumbIds[position];
         System.out.println("ImageAdapter.deplacerCase");
+
+        if(position%taille==0){
+            if((position != mThumbIds.length-1) && mThumbIds[position+1] == caseVide ) {
+                mThumbIds[position] = mThumbIds[position + 1];
+                mThumbIds[position + 1] = img;
+                Log.d("test", "position + 1 ");
+            }
+            //si la case est vide au dessus
+            else if((position >= taille ) && mThumbIds[position-taille] == caseVide){
+                mThumbIds[position] = mThumbIds[position-taille];
+                mThumbIds[position-taille]=img;
+                Log.d("test", "position - taille");
+            }
+            //si la case est vide en dessous
+            else if((position <= (taille*taille) - taille ) && mThumbIds[position+taille] == caseVide){
+                mThumbIds[position] = mThumbIds[position+taille];
+                mThumbIds[position+taille]=img;
+                Log.d("test", "position + taille");
+            }
+            else {
+                Toast toast = Toast.makeText(mContext, "Mouvement impossible ! ", Toast.LENGTH_LONG);
+                toast.show();
+            }
+        }
+        else if(position%taille == (taille-1)){
+            //si la case est vide a gauche
+            if((position != 0) && mThumbIds[position-1] == caseVide){
+                mThumbIds[position] = mThumbIds[position-1];
+                mThumbIds[position-1]=img;
+                Log.d("test", "position - 1 ");
+
+            }
+            //si la case est vide au dessus
+            else if((position >= taille ) && mThumbIds[position-taille] == caseVide){
+                mThumbIds[position] = mThumbIds[position-taille];
+                mThumbIds[position-taille]=img;
+                Log.d("test", "position - taille");
+            }
+            //si la case est vide en dessous
+            else if((position <= (taille*taille) - taille ) && mThumbIds[position+taille] == caseVide){
+                mThumbIds[position] = mThumbIds[position+taille];
+                mThumbIds[position+taille]=img;
+                Log.d("test", "position + taille");
+            }
+            else{
+                Toast toast = Toast.makeText(mContext, "Mouvement impossible ! ", Toast.LENGTH_LONG);
+                toast.show();
+            }
+        }
+        else{
+            //Si la case vide est à droite
+            if((position != mThumbIds.length-1) && mThumbIds[position+1] == caseVide ){
+                mThumbIds[position] = mThumbIds[position+1];
+                mThumbIds[position+1]=img;
+                Log.d("test", "position + 1 ");
+            }
+            //si la case est vide a gauche
+            else if((position != 0) && mThumbIds[position-1] == caseVide){
+                mThumbIds[position] = mThumbIds[position-1];
+                mThumbIds[position-1]=img;
+                Log.d("test", "position - 1 ");
+
+            }
+            //si la case est vide au dessus
+            else if((position >= taille ) && mThumbIds[position-taille] == caseVide){
+                mThumbIds[position] = mThumbIds[position-taille];
+                mThumbIds[position-taille]=img;
+                Log.d("test", "position - taille");
+            }
+            //si la case est vide en dessous
+            else if((position <= (taille*taille) - taille ) && mThumbIds[position+taille] == caseVide){
+                mThumbIds[position] = mThumbIds[position+taille];
+                mThumbIds[position+taille]=img;
+                Log.d("test", "position + taille");
+            }
+            else{
+                Toast toast = Toast.makeText(mContext, "Mouvement impossible ! ", Toast.LENGTH_LONG);
+                toast.show();
+            }
+        }
+
         //Si la case vide est à droite
-        if((position != mThumbIds.length-1) && mThumbIds[position+1] == caseVide ){
+        /*if((position != mThumbIds.length-1) && mThumbIds[position+1] == caseVide ){
             mThumbIds[position] = mThumbIds[position+1];
             mThumbIds[position+1]=img;
             Log.d("test", "position + 1 ");
@@ -104,7 +185,7 @@ public class ImageAdapter extends BaseAdapter {
         else{
             Toast toast = Toast.makeText(mContext, "Mouvement impossible ! ", Toast.LENGTH_LONG);
             toast.show();
-        }
+        }*/
 
     }
 

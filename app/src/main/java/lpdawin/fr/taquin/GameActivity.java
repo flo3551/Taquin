@@ -29,6 +29,7 @@ public class GameActivity extends Activity {
         tailleGrille = this.getIntent().getStringExtra("tailleGrille");
         taille = Integer.parseInt(tailleGrille);
 
+        Bitmap image = BitmapFactory.decodeResource(this.getResources(), R.drawable.jonsnow);
 
         switch (pathImage){
             case "1":

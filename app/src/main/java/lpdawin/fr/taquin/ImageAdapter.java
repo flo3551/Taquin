@@ -2,9 +2,12 @@ package lpdawin.fr.taquin;
 
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.graphics.Point;
 import android.util.Log;
+import android.view.Display;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.BaseAdapter;
 import android.widget.GridView;
 import android.widget.ImageView;
@@ -20,13 +23,13 @@ public class ImageAdapter extends BaseAdapter {
         mContext = c;
         this.image = image;
         this.taille = taille;
-        decouper(this.image);
         this.mThumbIds = new Bitmap[taille * taille];
+        decouper(this.image);
     }
 
     public void decouper(Bitmap image){
         int tailleDecoupe = image.getWidth() / taille;
-        Log.d("test", tailleDecoupe +"");
+        Log.d("test", tailleDecoupe + "");
         int indice=0;
         for (int y=0;y < taille ;y++){
             for( int x =0;x<taille; x++){
@@ -56,9 +59,28 @@ public class ImageAdapter extends BaseAdapter {
         if (convertView == null) {
             // if it's not recycled, initialize some attributes
             imageView = new ImageView(mContext);
-            imageView.setLayoutParams(new GridView.LayoutParams(85, 85));
+
+            WindowManager wm = (WindowManager) mContext.getSystemService(Context.WINDOW_SERVICE);
+            Display display = wm.getDefaultDisplay();
+            Point size = new Point();
+            display.getSize(size);
+            int width = size.x;
+            int height = width;
+            width = width -10;
+            switch(taille){
+                case 3:
+                    imageView.setLayoutParams(new GridView.LayoutParams(width/3, height/3));
+                    break;
+                case 4:
+                    imageView.setLayoutParams(new GridView.LayoutParams(width/4, height/4));
+                    break;
+                case 5:
+                    imageView.setLayoutParams(new GridView.LayoutParams(width/5, height/5));
+                    break;
+
+            }
             imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
-            imageView.setPadding(8, 8, 8, 8);
+            imageView.setPadding(2,2,2,2);
         } else {
             imageView = (ImageView) convertView;
         }

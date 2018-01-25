@@ -89,17 +89,17 @@ public class ImageAdapter extends BaseAdapter {
             Log.d("test", "position - 1 ");
 
         }
-        //si la case est vide en dessous
-        else if((position <= (taille*taille) - taille ) && mThumbIds[position+taille] == caseVide){
-            mThumbIds[position] = mThumbIds[position+taille];
-            mThumbIds[position+taille]=img;
-            Log.d("test", "position + taille");
-        }
         //si la case est vide au dessus
         else if((position >= taille ) && mThumbIds[position-taille] == caseVide){
             mThumbIds[position] = mThumbIds[position-taille];
             mThumbIds[position-taille]=img;
             Log.d("test", "position - taille");
+        }
+        //si la case est vide en dessous
+        else if((position <= (taille*taille) - taille ) && mThumbIds[position+taille] == caseVide){
+            mThumbIds[position] = mThumbIds[position+taille];
+            mThumbIds[position+taille]=img;
+            Log.d("test", "position + taille");
         }
         else{
             Toast toast = Toast.makeText(mContext, "Mouvement impossible ! ", Toast.LENGTH_LONG);
